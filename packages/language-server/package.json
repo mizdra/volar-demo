@@ -15,7 +15,6 @@
 		"@volar/language-server": "~1.10.4",
 		"@volar/language-service": "~1.10.4",
 		"volar-service-css": "0.0.14",
-		"volar-service-emmet": "0.0.14",
 		"volar-service-html": "0.0.14",
 		"vscode-html-languageservice": "^5.1.0"
 	}
