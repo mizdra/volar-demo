@@ -2,6 +2,7 @@ import { Language, VirtualFile, FileKind, FileCapabilities, FileRangeCapabilitie
 import * as html from 'vscode-html-languageservice';
 import type * as ts from 'typescript/lib/tsserverlibrary';
 
+/** `.html1` の Language オブジェクト */
 export const language: Language<Html1File> = {
 	createVirtualFile(fileName, snapshot) {
 		if (fileName.endsWith('.html1')) {
@@ -15,7 +16,11 @@ export const language: Language<Html1File> = {
 
 const htmlLs = html.getLanguageService();
 
-/** `.html1` という拡張子のファイルをモデリングしたもの。 */
+/**
+ * `.html1` の VirtualFile オブジェクト。
+ * `.html1` の中身をパースして、どのような言語がどこに組み込まれているかを
+ * Volar.js に伝える役割を担っている。
+ * */
 export class Html1File implements VirtualFile {
 	kind = FileKind.TextFile;
 	capabilities = FileCapabilities.full;

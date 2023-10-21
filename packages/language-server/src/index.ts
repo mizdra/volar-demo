@@ -6,12 +6,14 @@ import { createConnection, startLanguageServer, LanguageServerPlugin } from '@vo
 const plugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> => ({
 	extraFileExtensions: [{ extension: 'html1', isMixedContent: true, scriptKind: 7 }],
 	resolveConfig(config) {
-
-		// `.html1` のパーサーのようなものを登録
+		// 1. Language オブジェクトを登録。
+		// `.html1` の中身をパースして、どのような言語がどこに組み込まれているかを
+		// Volar.js に伝える役割を担っている。
 		config.languages ??= {};
 		config.languages.html1 ??= language;
 
-		// `.html1` の中で使われる言語のサービス (言語機能を提供する君) を登録
+		// 2. `.html1` に組み込まれている言語のための Service を登録。
+		// Service とはエディタからのリクエストを受け取って、言語機能を提供するもののこと。
 		config.services ??= {};
 		config.services.html ??= createHtmlService();
 		config.services.css ??= createCssService();
