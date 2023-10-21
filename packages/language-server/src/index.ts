@@ -2,6 +2,7 @@ import { language } from './language';
 import createHtmlService from 'volar-service-html';
 import createCssService from 'volar-service-css';
 import { createConnection, startLanguageServer, LanguageServerPlugin } from '@volar/language-server/node';
+import {createHtml1Service} from './service';
 
 const plugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> => ({
 	extraFileExtensions: [{ extension: 'html1', isMixedContent: true, scriptKind: 7 }],
@@ -17,12 +18,7 @@ const plugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> => ({
 		config.services ??= {};
 		config.services.html ??= createHtmlService();
 		config.services.css ??= createCssService();
-		config.services.html1 ??= (_serviceContext) => ({
-			// 以下を実装すれば、コード補完をカスタマイズできる
-			// provideCompletionItems: (uri, position, context) => {
-			//   // ...
-			// },
-		});
+		config.services.html1 ??= createHtml1Service();
 
 		return config;
 	},
