@@ -15,8 +15,8 @@ export const language: Language<Html1File> = {
 
 const htmlLs = html.getLanguageService();
 
+/** `.html1` という拡張子のファイルをモデリングしたもの。 */
 export class Html1File implements VirtualFile {
-
 	kind = FileKind.TextFile;
 	capabilities = FileCapabilities.full;
 	codegenStacks = [];
@@ -24,14 +24,12 @@ export class Html1File implements VirtualFile {
 	fileName!: string;
 	mappings!: VirtualFile['mappings'];
 	embeddedFiles!: VirtualFile['embeddedFiles'];
-	document!: html.TextDocument;
 	htmlDocument!: html.HTMLDocument;
 
 	constructor(
 		public sourceFileName: string,
 		public snapshot: ts.IScriptSnapshot,
 	) {
-		this.fileName = sourceFileName + '.html';
 		this.onSnapshotUpdated();
 	}
 
@@ -40,25 +38,26 @@ export class Html1File implements VirtualFile {
 		this.onSnapshotUpdated();
 	}
 
+	/** ファイルが更新されたときに呼ばれるメソッド */
 	onSnapshotUpdated() {
+		// ファイル全体を `.html` ファイルとして扱うよう指示
+		this.fileName = this.sourceFileName + '.html'; // `example.html1` なら `example.html1.html`
 		this.mappings = [{
 			sourceRange: [0, this.snapshot.getLength()],
 			generatedRange: [0, this.snapshot.getLength()],
 			data: FileRangeCapabilities.full,
 		}];
-		this.document = html.TextDocument.create(this.fileName, 'html', 0, this.snapshot.getText(0, this.snapshot.getLength()));
-		this.htmlDocument = htmlLs.parseHTMLDocument(this.document);
-		this.embeddedFiles = [];
-		this.addStyleTag();
-	}
+		// 以下はおまじない
+		const document = html.TextDocument.create(this.fileName, 'html', 0, this.snapshot.getText(0, this.snapshot.getLength()));
+		this.htmlDocument = htmlLs.parseHTMLDocument(document);
 
-	addStyleTag() {
-		let i = 0;
+		// ファイルを解析して、style タグを見つけたら、その中身を `.css` ファイルとして扱うよう指示
+		this.embeddedFiles = [];
 		this.htmlDocument.roots.forEach(root => {
 			if (root.tag === 'style' && root.startTagEnd !== undefined && root.endTagStart !== undefined) {
 				const styleText = this.snapshot.getText(root.startTagEnd, root.endTagStart);
 				this.embeddedFiles.push({
-					fileName: this.fileName + `.${i++}.css`,
+					fileName: this.fileName + `.css`, // `example.html1` なら `example.html1.css`
 					kind: FileKind.TextFile,
 					snapshot: {
 						getText: (start, end) => styleText.substring(start, end),
