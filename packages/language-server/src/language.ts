@@ -1,6 +1,7 @@
 import { Language, VirtualFile, FileKind, FileCapabilities, FileRangeCapabilities } from '@volar/language-core';
 import * as html from 'vscode-html-languageservice';
 import type * as ts from 'typescript/lib/tsserverlibrary';
+import * as css from 'vscode-css-languageservice';
 
 export const language: Language<Html1File> = {
 	createVirtualFile(fileName, snapshot) {
@@ -14,6 +15,7 @@ export const language: Language<Html1File> = {
 };
 
 const htmlLs = html.getLanguageService();
+const cssLs = css.getCSSLanguageService();
 
 export class Html1File implements VirtualFile {
 
@@ -26,6 +28,7 @@ export class Html1File implements VirtualFile {
 	embeddedFiles!: VirtualFile['embeddedFiles'];
 	document!: html.TextDocument;
 	htmlDocument!: html.HTMLDocument;
+	cssTokens: html.SymbolInformation[] = [];
 
 	constructor(
 		public sourceFileName: string,
@@ -54,11 +57,19 @@ export class Html1File implements VirtualFile {
 
 	addStyleTag() {
 		let i = 0;
+		this.cssTokens = [];
 		this.htmlDocument.roots.forEach(root => {
 			if (root.tag === 'style' && root.startTagEnd !== undefined && root.endTagStart !== undefined) {
 				const styleText = this.snapshot.getText(root.startTagEnd, root.endTagStart);
+				const fileName = this.fileName + `.${i++}.css`;
+
+				const document = html.TextDocument.create(fileName, 'css', 0, styleText);
+				const stylesheet = cssLs.parseStylesheet(document);
+				const symbols = cssLs.findDocumentSymbols(document, stylesheet)
+				this.cssTokens.push(...symbols)
+				
 				this.embeddedFiles.push({
-					fileName: this.fileName + `.${i++}.css`,
+					fileName: fileName,
 					kind: FileKind.TextFile,
 					snapshot: {
 						getText: (start, end) => styleText.substring(start, end),

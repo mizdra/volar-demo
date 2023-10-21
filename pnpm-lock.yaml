@@ -35,6 +35,9 @@ importers:
       volar-service-html:
         specifier: 0.0.14
         version: 0.0.14(@volar/language-service@1.10.4)
+      vscode-css-languageservice:
+        specifier: ^6.2.10
+        version: 6.2.10
       vscode-html-languageservice:
         specifier: ^5.1.0
         version: 5.1.0

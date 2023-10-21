@@ -1,8 +1,8 @@
-<!-- type any css in following block to get css completion -->
-<style>.foo { c }</style>
+<style>
+.foo { color: red; }
+.bar { color: blue; }
+</style>
 
-<!-- custom diagnosis: Only one style tag is allowed. -->
-<style></style>
-
-<!-- type ">" to trigger auto close --> 
-<div
+<!-- type `class="` and request completion, then suggest `foo` --> 
+<div class="">
+</div>
