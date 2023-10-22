@@ -1,6 +1,4 @@
-
-import { language } from '@html1/language-server/out/language';
-import { createHtml1Service } from '@html1/language-server/out/service';
+import { language, createHtml1Service } from '@html1/core';
 
 import createHtmlService from 'volar-service-html';
 import createCssService from 'volar-service-css';

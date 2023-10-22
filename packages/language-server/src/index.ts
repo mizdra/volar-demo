@@ -1,8 +1,7 @@
-import { language } from './language';
+import { language, createHtml1Service } from '@html1/core';
 import createHtmlService from 'volar-service-html';
 import createCssService from 'volar-service-css';
 import { createConnection, startLanguageServer, LanguageServerPlugin } from '@volar/language-server/node';
-import {createHtml1Service} from './service';
 
 const plugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> => ({
 	extraFileExtensions: [{ extension: 'html1', isMixedContent: true, scriptKind: 7 }],
