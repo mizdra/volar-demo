@@ -1,0 +1,26 @@
+{
+	"private": true,
+	"name": "html1-check",
+	"version": "0.0.1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/volarjs/starter.git",
+		"directory": "packages/html1-check"
+	},
+	"author": "volarjs",
+	"main": "./dist/index.js",
+	"bin": {
+		"html1-check": "./bin/html1-check.js"
+	},
+	"scripts": {
+		"prebuild": "cd ../.. && npm run build",
+		"build": "tsc",
+		"watch": "npm run build -- --watch"
+	},
+	"dependencies": {
+		"@html1/language-server": "workspace:*",
+		"@volar/kit": "^1.10.4",
+		"volar-service-css": "0.0.14",
+		"volar-service-html": "0.0.14"
+	}
+}

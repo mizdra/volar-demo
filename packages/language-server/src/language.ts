@@ -29,6 +29,7 @@ export class Html1File implements VirtualFile {
 	fileName!: string;
 	mappings!: VirtualFile['mappings'];
 	embeddedFiles!: VirtualFile['embeddedFiles'];
+	document!: html.TextDocument;
 	htmlDocument!: html.HTMLDocument;
 
 	constructor(
@@ -53,8 +54,8 @@ export class Html1File implements VirtualFile {
 			data: FileRangeCapabilities.full,
 		}];
 		// 以下はおまじない
-		const document = html.TextDocument.create(this.fileName, 'html', 0, this.snapshot.getText(0, this.snapshot.getLength()));
-		this.htmlDocument = htmlLs.parseHTMLDocument(document);
+		this.document = html.TextDocument.create(this.fileName, 'html', 0, this.snapshot.getText(0, this.snapshot.getLength()));
+		this.htmlDocument = htmlLs.parseHTMLDocument(this.document);
 
 		// ファイルを解析して、style タグを見つけたら、その中身を `.css` ファイルとして扱うよう指示
 		this.embeddedFiles = [];

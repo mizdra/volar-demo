@@ -1,10 +1,12 @@
-<!-- ここでは HTML の言語機能が使える --> 
-<div>
-    <article class=""></article>
-</div>
-
+<!-- type any css in following block to get css completion -->
 <style>
-/* この中では CSS の言語機能が使える */
 .foo { color: red; }
+
 </style>
 
+<!-- custom diagnosis: Only one style tag is allowed. -->
+<style></style>
+
+<!-- type ">" to trigger auto close --> 
+<div class="">
+</div>
