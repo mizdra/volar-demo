@@ -1,6 +1,7 @@
 import { language, createHtml1Service } from '@html1/core';
 import createHtmlService from 'volar-service-html';
 import createCssService from 'volar-service-css';
+import createEmmetService from 'volar-service-emmet';
 import { createConnection, startLanguageServer, LanguageServerPlugin } from '@volar/language-server/node';
 
 const plugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> => ({
@@ -17,6 +18,7 @@ const plugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> => ({
 		config.services ??= {};
 		config.services.html ??= createHtmlService();
 		config.services.css ??= createCssService();
+		config.services.emmet ??= createEmmetService();
 		config.services.html1 ??= createHtml1Service();
 
 		return config;
