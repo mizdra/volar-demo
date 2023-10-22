@@ -18,7 +18,7 @@ const htmlLs = html.getLanguageService();
 
 /**
  * `.html1` の VirtualFile オブジェクト。
- * `.html1` の中身をパースして、どのような言語がどこに組み込まれているかを
+ * `.html1` の中身を解析して、どのような言語がどこに組み込まれているかを
  * Volar.js に伝える役割を担っている。
  * */
 export class Html1File implements VirtualFile {
