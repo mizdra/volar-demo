@@ -1,23 +1,29 @@
-# language-tools-starter
+# volar-demo
 
-This is a template for building Embedded Language Tools based on Volar Framework.
+## What's this?
 
-If you're working on something like this, you probably started with VSCode's [Embedded Programming Languages](https://code.visualstudio.com/api/language-extensions/embedded-languages) chapter. If not, I strongly suggest you read it carefully first.
+This is Volar.js demo project for Vue Fes Japan 2023. Volar.js is Embedded Language Tools Framework.
 
-The article mentions two methods to implement Embedded Language support. This template belongs to the extension of the "Language Server for Embedded Language with Language Services" method, but we abstract all the places you don't need to care about, such as virtual code mapping, formatting edits merge etc.
+It is based on https://github.com/volarjs/starter but with some modifications.
 
-Same with the article, this template uses .html1 as an example to implement embedded HTML and CSS support.
+## Project Structure
 
-## Tools
+- `packages/language-server`: The language server for `.html1`
+- `packages/vscode`: VSCode extension for `.html1`
+  - This wraps `packages/language-server` and provides language features to VS Code.
+  - See "Running the language server" section for more information.
+- `packages/check`: The checker for `.html1`
+  - This is a standalone checker for `.html1`.
+  - It can be used in Terminal or CI.
+  - See "Usage" section for more information.
+- `packages/core`: The core modules of `.html1`
+  - This is the core module referenced by `packages/language-server` and `package/check`.
 
-- pnpm: monorepo support
-- esbuild: bundle extension
-
-## Running the Sample
+## Running the language server
 
 - Run `pnpm install` in this folder. This installs all necessary npm modules in both the client and server folder
 - Open VS Code on this folder.
-- Press Ctrl+Shift+B to compile the client and server.
+- Press Ctrl+Shift+B (Command+Shift+B on Mac) to compile the client and server.
 - Switch to the Debug viewlet.
 - Select `Launch Client` from the drop down.
 - Run the launch config.
@@ -26,6 +32,21 @@ Same with the article, this template uses .html1 as an example to implement embe
   - Type `<d|` to try HTML completion
   - Type `<style>.foo { c| }</style>` to try CSS completion
   - Have `<style>.foo { }</style>` to see CSS Diagnostics
+
+## Running the checker
+
+- Run `pnpm install` in this folder. This installs all necessary npm modules in both the client and server folder
+- Open VS Code on this folder.
+- Press Ctrl+Shift+B (Command+Shift+B on Mac) to compile the client and server.
+- Run `./packages/check/bin/html1-check.js sample/test.html1` in this folder.
+
+```console
+$ ./packages/check/bin/html1-check.js sample/test.html1
+sample/test.html1:8:1 - warning html1: Only one style tag is allowed.
+
+8 <style></style>
+  ~~~~~~~~~~~~~~~
+```
 
 ## Build .vsix
 
