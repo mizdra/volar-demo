@@ -33,6 +33,8 @@ It is based on https://github.com/volarjs/starter but with some modifications.
   - Type `<style>.foo { c| }</style>` to try CSS completion
   - Have `<style>.foo { }</style>` to see CSS Diagnostics
 
+![The screenshot of running language server](screenshots/language-server.png)
+
 ## Running the checker
 
 - Run `pnpm install` in this folder. This installs all necessary npm modules in both the client and server folder
@@ -40,13 +42,7 @@ It is based on https://github.com/volarjs/starter but with some modifications.
 - Press Ctrl+Shift+B (Command+Shift+B on Mac) to compile the client and server.
 - Run `./packages/check/bin/html1-check.js sample/test.html1` in this folder.
 
-```console
-$ ./packages/check/bin/html1-check.js sample/test.html1
-sample/test.html1:8:1 - warning html1: Only one style tag is allowed.
-
-8 <style></style>
-  ~~~~~~~~~~~~~~~
-```
+![The screenshot of running the checker](screenshots/checker.png)
 
 ## Build .vsix
 
