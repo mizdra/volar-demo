@@ -1,11 +1,11 @@
 {
 	"private": true,
-	"name": "html1-check",
+	"name": "@html1/check",
 	"version": "0.0.1",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/volarjs/starter.git",
-		"directory": "packages/html1-check"
+		"directory": "packages/check"
 	},
 	"author": "volarjs",
 	"main": "./dist/index.js",

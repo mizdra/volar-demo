@@ -15,7 +15,7 @@ importers:
         specifier: latest
         version: 5.2.2
 
-  packages/html1-check:
+  packages/check:
     dependencies:
       '@html1/language-server':
         specifier: workspace:*
