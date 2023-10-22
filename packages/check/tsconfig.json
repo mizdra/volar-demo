@@ -9,7 +9,7 @@
 	],
 	"references": [
 		{
-			"path": "../language-server/tsconfig.json"
+			"path": "../core/tsconfig.json"
 		}
 	]
 }

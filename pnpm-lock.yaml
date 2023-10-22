@@ -17,18 +17,18 @@ importers:
 
   packages/check:
     dependencies:
-      '@html1/language-server':
+      '@html1/core':
         specifier: workspace:*
-        version: link:../language-server
+        version: link:../core
       '@volar/kit':
         specifier: ^1.10.4
         version: 1.10.4(typescript@5.2.2)
       volar-service-css:
         specifier: 0.0.14
-        version: 0.0.14(@volar/language-service@1.10.4)
+        version: 0.0.14
       volar-service-html:
         specifier: 0.0.14
-        version: 0.0.14(@volar/language-service@1.10.4)
+        version: 0.0.14
 
   packages/core:
     dependencies:
@@ -44,24 +44,18 @@ importers:
 
   packages/language-server:
     dependencies:
-      '@volar/language-core':
-        specifier: ~1.10.4
-        version: 1.10.4
+      '@html1/core':
+        specifier: workspace:*
+        version: link:../core
       '@volar/language-server':
-        specifier: ~1.10.4
-        version: 1.10.4
-      '@volar/language-service':
         specifier: ~1.10.4
         version: 1.10.4
       volar-service-css:
         specifier: 0.0.14
-        version: 0.0.14(@volar/language-service@1.10.4)
+        version: 0.0.14
       volar-service-html:
         specifier: 0.0.14
-        version: 0.0.14(@volar/language-service@1.10.4)
-      vscode-html-languageservice:
-        specifier: ^5.1.0
-        version: 5.1.0
+        version: 0.0.14
 
   packages/vscode:
     devDependencies:
@@ -1041,7 +1035,7 @@ packages:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
 
-  /volar-service-css@0.0.14(@volar/language-service@1.10.4):
+  /volar-service-css@0.0.14:
     resolution: {integrity: sha512-xmyKoyWpbgM0u7mGA1ogyj5ol7CfQADm5eXNpeJeX3Rp79rFEtz1DuuaIjcgRvhSYsjJfPBOtOvHBwTRf4HaEQ==}
     peerDependencies:
       '@volar/language-service': ~1.10.0
@@ -1049,12 +1043,11 @@ packages:
       '@volar/language-service':
         optional: true
     dependencies:
-      '@volar/language-service': 1.10.4
       vscode-css-languageservice: 6.2.10
       vscode-uri: 3.0.8
     dev: false
 
-  /volar-service-html@0.0.14(@volar/language-service@1.10.4):
+  /volar-service-html@0.0.14:
     resolution: {integrity: sha512-PQb97QICxXhXD7AJFU/S/Vexd1L4IP2Sa5SzxYyKnApcx0GNdxaIbFHlev9wazrTgtCtSnaVXJBxY05pZzTKPw==}
     peerDependencies:
       '@volar/language-service': ~1.10.0
@@ -1062,7 +1055,6 @@ packages:
       '@volar/language-service':
         optional: true
     dependencies:
-      '@volar/language-service': 1.10.4
       vscode-html-languageservice: 5.1.0
       vscode-uri: 3.0.8
     dev: false
